@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="style.css">
+
+<title>Begivenheder</title>
+<head>
+
+</head>
+<body>
+	<div class="Centered">
+	<h1>
+	Form for at updatere begivenheder står under
+	</h1>
+	<p>
+	Noget tekst her
+	</p>
+	</div>
+	<div class="Base">
+		<img src="Begivenheder.png" alt="Begivenheder">
+
+		<form action="HyggeTest.php" method="post">
+		<div 
+			style="
+			position: absolute;
+			top: 9%;
+			left: 10%;
+  			border: 4px solid #73AD21;">
+  			<input 	type="text" name="Subject"  required onclick="UpdateRequest()"
+       				minlength="2" maxlength="18" size="30">
+  		</div>
+
+  		<div 
+			style="
+			position: absolute;
+			top: 9%;
+			left: 55%;
+  			border: 4px solid #73AD21;">
+  			<select name="Type" required onclick="UpdateRequest()"> 
+				<option value="volvo">Møde/ Begivenhed</option>
+				<option value="saab">Ekskursion</option>
+				<option value="opel">Ferie</option>
+				<option value="audi">Andet</option>
+			</select>
+  		</div>
+  		
+		
+		<div 
+			style="
+			position: absolute;
+			top: 16%;
+			left: 10%;
+  			border: 4px solid #73AD21;">
+  			<input 	list="UserList" name="UserSearch" multiple onclick="UpdateRequest()"
+  					placeholder="Søg efter deltagere..." size="30">
+  		</div>
+
+  		<div 
+			style="
+			position: absolute;
+			top: 16%;
+			left: 55%;
+  			border: 4px solid #73AD21;">
+  			<input 	type="search" name="CoUserSearch" onclick="UpdateRequest()"
+  					placeholder="Søg efter medarrangør..." size="30">
+  		</div>
+
+
+  		<div 
+			style="
+			position: absolute;
+			top: 19%;
+			left: 8%;
+  			border: 4px solid #73AD21;">
+  			<input 	type="checkbox" name="Anmod"
+  					id="anmod" onclick="UpdateRequest()">
+  		</div>
+
+  		<div 
+			style="
+			position: absolute;
+			top: 21%;
+			left: 8%;
+  			border: 4px solid #73AD21;">
+  			<input 	type="checkbox" name="TilKalender" onclick="UpdateRequest()">
+  		</div>
+
+  		<div 
+			style="
+			position: absolute;
+			top: 24%;
+			left: 8%;
+  			border: 4px solid #73AD21;">
+  			<input 	type="checkbox" name="IkkeEgenKalender" onclick="UpdateRequest()">
+  		</div>
+
+  		<div 
+			style="
+			position: absolute;
+			top: 31.8%;
+			left: 53%;
+  			border: 4px solid #73AD21;">
+  			<input 	type="checkbox" name="WholeDay" onclick="UpdateRequest()">
+  		</div>
+
+  		<div 
+			style="
+			position: absolute;
+			top: 33.8%;
+			left: 53%;
+  			border: 4px solid #73AD21;">
+  			<input 	type="checkbox" name="Private" onclick="UpdateRequest()">
+  		</div>
+
+
+		<div 
+			style="
+			position: absolute;
+			top: 40%;
+			left: 10%;
+  			border: 4px solid #73AD21;">
+  			<input type="date" name="EndDate" id="EndDate" required
+			       onclick="UpdateRequest()" value="2022-05-21">
+  		</div>
+
+
+  		<div 
+			style="
+			position: absolute;
+			top: 33%;
+			left: 10%;
+  			border: 4px solid #73AD21;">
+  			<input type="date" name="StartDate" id="StartDate" required
+			       onclick="UpdateRequest()" value="2022-05-21">
+  		</div>
+
+  		<div 
+			style="
+			position: absolute;
+			top: 40%;
+			left: 55%;
+  			border: 4px solid #73AD21;">
+  			<select name="Frequency" onclick="UpdateRequest()">
+				<option value="volvo">Aldrig</option>
+				<option value="saab">Dagligt</option>
+				<option value="opel">Ugenligt</option>
+				<option value="audi">Månedligt</option>
+			</select>
+  		</div>
+
+  		<div 
+			style="
+			position: absolute;
+			top: 33%;
+			left: 32%;
+  			border: 4px solid #73AD21;">
+  			<input 	type="time" name="StartTime" required
+       				onclick="UpdateRequest()">
+  		</div>
+
+  		<div 
+			style="
+			position: absolute;
+			top: 40%;
+			left: 32%;
+  			border: 4px solid #73AD21;">
+  			<input 	type="time" name="EndTime" required
+       				onclick="UpdateRequest()">
+  		</div>
+
+
+  		<div 
+			style="
+			position: absolute;
+			top: 47%;
+			left: 10%;
+  			border: 4px solid #73AD21;">
+  			<input 	type="date" name="AnswerDeadline" required
+       				value="2022-05-21" onclick="UpdateRequest()">
+  		</div>
+
+  		<div 
+			style="
+			position: absolute;
+			top: 54%;
+			left: 10%;
+  			border: 4px solid #73AD21;">
+  			<input 	type="search" name="PlaceSearch" onclick="UpdateRequest()"
+  					placeholder="Tilføj lokale..." size="30">
+  		</div>
+
+  		<div 
+			style="
+			position: absolute;
+			top: 54%;
+			left: 55%;
+  			border: 4px solid #73AD21;">
+  			<input 	type="search" name="PlaceSearchTwo" onclick="UpdateRequest()"
+  					placeholder="Tilføj ekstra lokale..." size="30">
+  		</div>
+
+  		<div 
+			style="
+			position: absolute;
+			top: 61%;
+			left: 10%;
+  			border: 4px solid #73AD21;">
+  			<input 	type="search" name="ResourceSearch" onclick="UpdateRequest()"
+  					placeholder="Søg efter ressource..." size="30">
+  		</div>
+
+  		<div 
+			style="
+			position: absolute;
+			top: 75%;
+			left: 10%;
+  			border: 4px solid #73AD21;">
+  			<input 	type="text" name="Text"  required onclick="UpdateRequest()"
+       				minlength="0" maxlength="1500" size="88">
+  		</div>
+
+  		<div 
+			style="
+			position: absolute;
+			top: 92.2%;
+			left: 74.5%;
+  			border: 4px solid #73AD21;">
+  			<input type="submit"
+  				   id="submit"
+			       value="Updater">
+  		</div>
+
+
+  		<div 
+			style="
+			position: absolute;
+			top: 86%;
+			left: 70%;
+			display: none;
+  			color: red;" id="Alerted">
+  			<p>
+  				*Der vil blive lavet en <br> ny anmodning, da Dato er ændret
+  			</p>
+  		</div>
+  		
+		</form>
+
+	</div>
+</body>
+
+
+<script type="text/javascript">
+
+function UpdateRequest(){
+	const cb = document.querySelector('#anmod');
+	const start = document.querySelector('#StartDate');
+	const end = document.querySelector('#EndDate');
+	if(cb.checked && (start.value != "2022-05-21" || end.value != "2022-05-21")){
+		document.getElementById("Alerted").style.display = "block";
+	}
+	else{
+		document.getElementById("Alerted").style.display = "none";
+	}
+}
+
+</script>
+
+</html>
