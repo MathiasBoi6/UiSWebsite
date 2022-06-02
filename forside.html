@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>forside</title>
+<style>
+
+
+.header {
+  padding: 5px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+  font-size: 15px;
+}
+
+.login {
+  width: 30%;
+  border-style: solid;
+  border-width: 4px;
+  top: 30%;
+  left: 12%;
+  position: absolute;
+  background-color: rgb(255,255,255, 0.9);
+  padding: 3px;
+  padding-left: 20px;
+}
+
+.registrer {
+  width: 30%;
+  border-style: solid;
+  border-width: 4px;
+  top: 30%;
+  right: 12%;
+  position: absolute;
+  background-color: rgb(255,255,255, 0.9);
+  padding: 3px;
+  padding-left: 20px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="header"><h1>Mathias Scholzs UiS funktionelle prototyper progam</h1></div>
+
+<div class="login">
+	<h1>Login</h1><br>
+	<form action="login.php" method="post">
+		Username: <input type="text" name="navn1" pattern="[^;\x22/']+" title="Tillader ikke semicolon, skråstreg, citationstegn eller apostrof"><br><br><br>
+		Password: <input type="text" name="kode1" pattern="[^;\x22/']+" title="Tillader ikke semicolon, skråstreg, citationstegn eller apostrof"><br><br><br>
+		<input type="submit">
+	</form>
+	<br>
+</div>
+
+<div class="registrer">
+	<h1>Register</h1><br>
+	<form action="login.php" method="post">
+		Username: <input type="text" name="navn2" pattern="[^;\x22/']+" title="Tillader ikke semicolon, skråstreg, citationstegn eller apostrof"><br><br><br>
+		Password: <input type="text" name="kode2" pattern="[^;\x22/']+" title="Tillader ikke semicolon, skråstreg, citationstegn eller apostrof"><br><br><br>
+    Age: <input type="number" name="Age" min="0" max="200"><br><br><br>
+    Role: <input type="text" name="Role" pattern="[^;\x22/']+" title="Tillader ikke semicolon, skråstreg, citationstegn eller apostrof"><br><br><br>
+		<input type="submit">
+	</form>
+	<br>
+</div>
+</body>
+</html>
