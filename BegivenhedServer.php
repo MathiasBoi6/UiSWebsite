@@ -13,7 +13,7 @@
 
 include_once 'TopNav.html';
 include_once 'ShowUser.php';
-include_once 'FrontPage.html';
+include_once 'BegivenhedPage.html';
 
 $servername = "localhost";
 $username = "root";
