@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Vært: 127.0.0.1
--- Genereringstid: 02. 06 2022 kl. 08:52:46
+-- Genereringstid: 05. 06 2022 kl. 12:19:46
 -- Serverversion: 10.1.38-MariaDB
 -- PHP-version: 7.3.4
 
@@ -31,22 +31,21 @@ SET time_zone = "+00:00";
 CREATE TABLE `begivenhed` (
   `EventID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
-  `Text` text COLLATE utf8mb4_danish_ci,
-  `Subject` text COLLATE utf8mb4_danish_ci NOT NULL,
-  `EventType` text COLLATE utf8mb4_danish_ci NOT NULL,
+  `Text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_danish_ci,
+  `Subject` text CHARACTER SET utf8mb4 COLLATE utf8mb4_danish_ci NOT NULL,
+  `EventType` text CHARACTER SET utf8mb4 COLLATE utf8mb4_danish_ci NOT NULL,
   `RequstedAnswer` tinyint(1) NOT NULL DEFAULT '0',
   `AnswerDeadline` date DEFAULT NULL,
   `StartTime` datetime NOT NULL,
   `EndTime` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_danish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_danish_ci;
 
 --
 -- Data dump for tabellen `begivenhed`
 --
 
 INSERT INTO `begivenhed` (`EventID`, `UserID`, `Text`, `Subject`, `EventType`, `RequstedAnswer`, `AnswerDeadline`, `StartTime`, `EndTime`) VALUES
-(73, 14, 'test', 'test', 'volvo', 0, '2022-05-21', '2022-05-21 22:52:00', '2022-05-21 21:53:00'),
-(74, 24, 'logged', 'logged', 'volvo', 0, '2022-05-21', '2022-05-21 21:55:00', '2022-05-21 01:00:00');
+(7, 25, 'Tester at kunne invitere personer', 'Inviter bruger', 'Begivenhed', 1, '2022-06-03', '2022-06-04 10:00:00', '2022-06-04 11:00:00');
 
 -- --------------------------------------------------------
 
@@ -55,10 +54,18 @@ INSERT INTO `begivenhed` (`EventID`, `UserID`, `Text`, `Subject`, `EventType`, `
 --
 
 CREATE TABLE `inviterede` (
+  `InvitationID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
   `EventID` int(11) NOT NULL,
-  `Answer` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_danish_ci;
+  `Answer` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_danish_ci;
+
+--
+-- Data dump for tabellen `inviterede`
+--
+
+INSERT INTO `inviterede` (`InvitationID`, `UserID`, `EventID`, `Answer`) VALUES
+(5, 1, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -67,20 +74,22 @@ CREATE TABLE `inviterede` (
 --
 
 CREATE TABLE `user` (
-  `Name` text COLLATE utf8mb4_danish_ci NOT NULL,
-  `Password` text COLLATE utf8mb4_danish_ci NOT NULL,
+  `Name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_danish_ci NOT NULL,
+  `Password` text CHARACTER SET utf8mb4 COLLATE utf8mb4_danish_ci NOT NULL,
   `Age` int(11) NOT NULL,
-  `Role` text COLLATE utf8mb4_danish_ci NOT NULL,
+  `Role` text CHARACTER SET utf8mb4 COLLATE utf8mb4_danish_ci NOT NULL,
   `SSN` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_danish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_danish_ci;
 
 --
 -- Data dump for tabellen `user`
 --
 
 INSERT INTO `user` (`Name`, `Password`, `Age`, `Role`, `SSN`) VALUES
+('Carl', '1234', 22, 'Student', 1),
 ('UiSTest', 'uis', 11, 'student', 14),
-('test', 'test', 4, 'test', 24);
+('test', 'test', 4, 'test', 24),
+('Mathias', '1234', 21, 'Student', 25);
 
 --
 -- Begrænsninger for dumpede tabeller
@@ -90,15 +99,13 @@ INSERT INTO `user` (`Name`, `Password`, `Age`, `Role`, `SSN`) VALUES
 -- Indeks for tabel `begivenhed`
 --
 ALTER TABLE `begivenhed`
-  ADD PRIMARY KEY (`EventID`),
-  ADD KEY `UserID` (`UserID`);
+  ADD PRIMARY KEY (`EventID`);
 
 --
 -- Indeks for tabel `inviterede`
 --
 ALTER TABLE `inviterede`
-  ADD UNIQUE KEY `UserID` (`UserID`),
-  ADD UNIQUE KEY `EventID` (`EventID`);
+  ADD PRIMARY KEY (`InvitationID`);
 
 --
 -- Indeks for tabel `user`
@@ -114,30 +121,19 @@ ALTER TABLE `user`
 -- Tilføj AUTO_INCREMENT i tabel `begivenhed`
 --
 ALTER TABLE `begivenhed`
-  MODIFY `EventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `EventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Tilføj AUTO_INCREMENT i tabel `inviterede`
+--
+ALTER TABLE `inviterede`
+  MODIFY `InvitationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `SSN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- Begrænsninger for dumpede tabeller
---
-
---
--- Begrænsninger for tabel `begivenhed`
---
-ALTER TABLE `begivenhed`
-  ADD CONSTRAINT `begivenhed_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`SSN`);
-
---
--- Begrænsninger for tabel `inviterede`
---
-ALTER TABLE `inviterede`
-  ADD CONSTRAINT `inviterede_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`SSN`),
-  ADD CONSTRAINT `inviterede_ibfk_2` FOREIGN KEY (`EventID`) REFERENCES `begivenhed` (`EventID`);
+  MODIFY `SSN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
