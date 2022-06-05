@@ -42,7 +42,6 @@ $result = $conn->query(
     WHERE SSN='$cookie'");
 
 if ($result->num_rows > 0) {
-    echo "<script> document.getElementsByClassName(\"ownEvents\").innerHTML = \"Hej med mig\" ; </script>"; 
     echo "<table><tr><th>Name</th><th>BegivenhedNr</th><th>Emne</th><th>StartDato</th><th>SlutDato</th><th>Anmodet svar</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
@@ -51,7 +50,7 @@ if ($result->num_rows > 0) {
     }
     echo "</table>";
 } else {
-    echo "0 results";
+    echo "<h1 style='color: white;'>You have not created any events</h1>";
 }
 
 
@@ -59,6 +58,30 @@ echo    "<br>
         <h2>
             Begivenheder du er blevet inviteret til:
         </h2>";
+
+
+
+$result = $conn->query(
+    "SELECT Name, Subject, EventType, StartTime, EndTime, AnswerDeadline, Answer, Text From inviterede
+    LEFT JOIN 
+        (SELECT EventID, Name, Subject, EventType, StartTime, EndTime, AnswerDeadline, RequstedAnswer, Text  FROM `begivenhed`
+        LEFT JOIN `user`
+        ON user.SSN = begivenhed.UserID) as Q1
+    ON inviterede.EventID = Q1.EventID
+    WHERE inviterede.UserID = '$cookie'");
+
+
+if ($result->num_rows > 0) {
+    echo "<table><tr><th>Navn</th><th>Emne</th><th>Type</th><th>StartDato</th><th>SlutDato</th><th>SvarDeadline</th><th>Dit svar</th><th>Text</th></tr>";
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<tr><td>" . $row["Name"]. "</td><td>" . $row["Subject"]. "</td><td>" . $row["EventType"]. "</td><td>" . $row["StartTime"]. "</td><td>" . $row["EndTime"].
+        "</td><td>" . $row["AnswerDeadline"]. "</td><td>" . $row["Answer"]."</td><td>" . $row["Text"]. "</td></tr>";
+    }
+    echo "</table>";
+} else {
+    echo "<h1 style='color: white;'>You have not been invited to anything</h1>";
+}
 
 echo "</div>";
 
