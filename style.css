@@ -8,6 +8,7 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  color: black;
 }
 
 td, th {
@@ -63,6 +64,7 @@ tr:nth-child(odd) {
   flex-direction: column;
   background-color: #3d718a;
   height: 100%;
+  color: white;
 }
 
 h1 {

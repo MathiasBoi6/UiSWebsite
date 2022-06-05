@@ -45,12 +45,16 @@ if ($result->num_rows > 0) {
     echo "<table><tr><th>Name</th><th>BegivenhedNr</th><th>Emne</th><th>StartDato</th><th>SlutDato</th><th>Anmodet svar</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
+        $requstedAnswer = "Nej";
+        if ($row["RequstedAnswer"] == 1) {
+            $requstedAnswer = "Ja";
+        }
         echo "<tr><td>" . $row["Name"]. "</td><td>" . $row["EventID"]. "</td><td>" . $row["Subject"]. "</td><td>" . $row["StartTime"]. "</td><td>" . $row["EndTime"].
-        "</td><td>" . $row["RequstedAnswer"]. "</td></tr>";
+        "</td><td>" . $requstedAnswer. "</td></tr>";
     }
     echo "</table>";
 } else {
-    echo "<h1 style='color: white;'>You have not created any events</h1>";
+    echo "<h1 style='color: red;'>Du har ikke lavet nogen events</h1>";
 }
 
 
@@ -80,7 +84,7 @@ if ($result->num_rows > 0) {
     }
     echo "</table>";
 } else {
-    echo "<h1 style='color: white;'>You have not been invited to anything</h1>";
+    echo "<h1 style='color: red;'>Du er ikke blevet inviteret til nogen begivenheder</h1>";
 }
 
 echo "</div>";

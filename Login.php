@@ -39,7 +39,7 @@ if(isset($_REQUEST["navn2"]) && isset($_REQUEST["kode2"])) {
 		setcookie($cookie_name, $cookie_value["SSN"], time() + (86400 * 30), "/"); // 86400 = 1 day
 
 
-		echo '<script type="text/javascript">', 'window.location.replace("http://localhost/Uni/BegivenhedServer.php");', '</script>';
+		echo '<script type="text/javascript">', 'window.location.replace("http://localhost/Uni/Forside.php");', '</script>';
 	} else {
 		echo'<script type="text/javascript">', 'alert("User name already exists!");', '</script>';
 	}
@@ -60,7 +60,7 @@ if(isset($_REQUEST["navn2"]) && isset($_REQUEST["kode2"])) {
 				setcookie($cookie_name, $cookie_value["SSN"], time() + (86400 * 30), "/"); // 86400 = 1 day
 
 
-				echo '<script type="text/javascript">', 'window.location.replace("http://localhost/Uni/BegivenhedServer.php");', '</script>';
+				echo '<script type="text/javascript">', 'window.location.replace("http://localhost/Uni/Forside.php");', '</script>';
 			} else {
 				echo'<script type="text/javascript">', 'alert("Code does not match username");', '</script>';
 			}

@@ -88,16 +88,16 @@ if(isset($_REQUEST["Subject"]) && isset($_REQUEST["Text"]) && isset($_REQUEST["T
 	echo "<h1>INSERT INTO inviterede VALUES ('$Users', '$last_id', DEFAULT)</h1>";
 
 }
-else{
-	echo "<h1>ISSET FAILED</h1>";
-	if (isset($_REQUEST["UserSearch"])){
-		echo "<h1>user was inputted</h1>";
-	}
-	else{
-		echo "<h1> DID NOT RECIVE USER</h1>";
-	}
-	
-}
+#else{
+#	echo "<h1>ISSET FAILED</h1>";
+#	if (isset($_REQUEST["UserSearch"])){
+#		echo "<h1>user was inputted</h1>";
+#	}
+#	else{
+#		echo "<h1> DID NOT RECIVE USER</h1>";
+#	}
+#	
+#}
 echo "</span>";
 
 $conn->close();

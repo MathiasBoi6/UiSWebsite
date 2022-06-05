@@ -16,11 +16,31 @@ include_once 'ShowUser.php';
 		Prototyper til forbedring af Aula.
 	</h1>
 	<h2>
-		Lavet af Mathias Scholz, Magnus ? og Carl Christian ?.
+		Lavet af Mathias, Magnus og Carl Christian.
 	</h2>
 	<p>
-		Test
+		Oversigt over hjemmeside:
 	</p>
+	<table>
+		<tr>
+			<th>Forside</th><td>Her kan du se oversigt over siden</td>
+		</tr>
+		<tr>
+			<th>Begivenheder</th><td>Her kan man lave begivenheder</td>
+		</tr>
+		<tr>
+			<th>Samtaler</th><td>Er ikke blevet implementeret</td>
+		</tr>
+		<tr>
+			<th>Beskeder</th><td>Er ikke blevet implementeret</td>
+		</tr>
+		<tr>
+			<th>Se begivenheder</th><td>Her kan du se de begivenheder som du har lavet og som du er blevet inviteret til</td>
+		</tr>
+		<tr>
+			<th>Login</th><td>Her kan du vælge bruger og oprette nye brugere</td>
+		</tr>
+	</table> 
 </div>
 
 </body>
