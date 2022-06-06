@@ -10,7 +10,6 @@ include_once 'TopNav.html';
 include_once 'ShowUser.php';
 include_once 'BegivenhedChangePage.html';
 
-
 $servername = "localhost";
 $username = "root";
 $password = "";
