@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Vært: 127.0.0.1
--- Genereringstid: 05. 06 2022 kl. 12:19:46
+-- Genereringstid: 06. 06 2022 kl. 12:00:24
 -- Serverversion: 10.1.38-MariaDB
 -- PHP-version: 7.3.4
 
@@ -45,7 +45,31 @@ CREATE TABLE `begivenhed` (
 --
 
 INSERT INTO `begivenhed` (`EventID`, `UserID`, `Text`, `Subject`, `EventType`, `RequstedAnswer`, `AnswerDeadline`, `StartTime`, `EndTime`) VALUES
-(7, 25, 'Tester at kunne invitere personer', 'Inviter bruger', 'Begivenhed', 1, '2022-06-03', '2022-06-04 10:00:00', '2022-06-04 11:00:00');
+(7, 25, 'Tester at kunne invitere personer', 'Inviter bruger', 'Begivenhed', 1, '2022-06-03', '2022-06-04 10:00:00', '2022-06-04 11:00:00'),
+(8, 26, 'Test til video', 'Test til video', 'Ferie', 1, '2022-06-01', '2022-06-05 15:50:00', '2022-06-05 16:51:00');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur-dump for tabellen `besked`
+--
+
+CREATE TABLE `besked` (
+  `BeskedID` int(11) NOT NULL,
+  `FromUserID` int(11) NOT NULL,
+  `ToUserID` int(11) NOT NULL,
+  `Subject` text CHARACTER SET utf8mb4 COLLATE utf8mb4_danish_ci NOT NULL,
+  `Text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_danish_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_danish_ci;
+
+--
+-- Data dump for tabellen `besked`
+--
+
+INSERT INTO `besked` (`BeskedID`, `FromUserID`, `ToUserID`, `Subject`, `Text`) VALUES
+(3, 25, 1, 'Test at sende besked', 'Hej carl :)'),
+(4, 25, 14, 'Visuel feedback fra submission', 'Test af alert'),
+(5, 1, 25, 'Svar pÃ¥ besked', 'Tak for beskeden Mathias');
 
 -- --------------------------------------------------------
 
@@ -65,7 +89,8 @@ CREATE TABLE `inviterede` (
 --
 
 INSERT INTO `inviterede` (`InvitationID`, `UserID`, `EventID`, `Answer`) VALUES
-(5, 1, 7, NULL);
+(5, 1, 7, NULL),
+(6, 25, 8, NULL);
 
 -- --------------------------------------------------------
 
@@ -89,7 +114,8 @@ INSERT INTO `user` (`Name`, `Password`, `Age`, `Role`, `SSN`) VALUES
 ('Carl', '1234', 22, 'Student', 1),
 ('UiSTest', 'uis', 11, 'student', 14),
 ('test', 'test', 4, 'test', 24),
-('Mathias', '1234', 21, 'Student', 25);
+('Mathias', '1234', 21, 'Student', 25),
+('Fremvisning', 'test', 21, 'Student', 26);
 
 --
 -- Begrænsninger for dumpede tabeller
@@ -100,6 +126,12 @@ INSERT INTO `user` (`Name`, `Password`, `Age`, `Role`, `SSN`) VALUES
 --
 ALTER TABLE `begivenhed`
   ADD PRIMARY KEY (`EventID`);
+
+--
+-- Indeks for tabel `besked`
+--
+ALTER TABLE `besked`
+  ADD PRIMARY KEY (`BeskedID`);
 
 --
 -- Indeks for tabel `inviterede`
@@ -121,19 +153,25 @@ ALTER TABLE `user`
 -- Tilføj AUTO_INCREMENT i tabel `begivenhed`
 --
 ALTER TABLE `begivenhed`
-  MODIFY `EventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `EventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Tilføj AUTO_INCREMENT i tabel `besked`
+--
+ALTER TABLE `besked`
+  MODIFY `BeskedID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `inviterede`
 --
 ALTER TABLE `inviterede`
-  MODIFY `InvitationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `InvitationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `SSN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `SSN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
