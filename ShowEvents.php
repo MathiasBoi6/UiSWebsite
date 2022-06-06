@@ -3,25 +3,6 @@
 <link rel="stylesheet" href="style.css">
 <body>
 
-<script>
-    function changeEvent(id) {
-        //Go to ChangeEvent.php and pass the id of the event as a cookie
-        var cookie_name = "changeEvent";
-        var cookie_value = id;
-        document.cookie = cookie_name + "=" + cookie_value + "; path=/";
-        window.location.replace("http://localhost/uiswebsite/ChangeEvent.php");
-    }
-</script>
-
-<?php
-function changeEventAux($id){
-    $cookie_name = "event2bChanged";
-	$cookie_value = $id;
-	setcookie($cookie_name, $cookie_value["SSN"], time() + (86400 * 30), "/"); // 86400 = 1 day
-}
-//php_func();
-?>
-
 <?php
 
 include_once 'TopNav.html';
@@ -76,16 +57,22 @@ if ($result->num_rows > 0) {
         }
         //Display the event name, id, subject, start, end time, if the user has requested to attend the event and a button for changing the event
         echo "<tr>
+        <form action='ChangeEvent.php' method='post'>
         <td>" . $row["Name"]. "</td>
         <td>" . $row["EventID"]. "</td>
         <td>" . $row["Subject"]. "</td>
         <td>" . $row["StartTime"]. "</td>
         <td>" . $row["EndTime"]. "</td>
         <td>" . $requstedAnswer. "</td>
-        <td> . <button onclick=\"changeEvent(" . $row["EventID"] . ")\">Ændre Begivenhed</button> </td>
+        <input style='display:none;' name='Subject' value='" .  $row["Subject"] ."'>
+        <input style='display:none;' name='StartTime' value='" .  $row["StartTime"] ."'>
+        <input style='display:none;' name='EndTime' value='" .  $row["EndTime"] ."'>
+        <td>" . "<button type='submit' name='eventID' value='" . $row["EventID"] . "'>Ændre</td>
+        </form>
         </tr>";
     }
     echo "</table>";
+    
 } else {
     echo "<h1 style='color: red;'>Du har ikke lavet nogle events</h1>";
 }

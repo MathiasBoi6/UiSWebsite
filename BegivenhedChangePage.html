@@ -9,24 +9,33 @@
 <body>
 	<div class="Centered">
 	<h1>
-	Form for at oprette begivenheder.
+	Form for at ændre begivenheder.
 	</h1>
 	<p>
 		For at lave en begivenhed skal alle de felter der er markeret med grønt sættes til en værdi. De røde felter er ikke implementeret færdige endnu.
 	</p>
+	<p>
+		Funktionen som prototypen understøtter, kan ses hvis man anmoder om svar, og ændre start eller slut dato.
+	</p>
 	<div class="Base">
 		<img src="Begivenheder.png" alt="Begivenheder">
 
-		<form action="BegivenhedServer.php" method="post">
+		<form action="ChangeEventPortal.php" method="post">
 		<div 
 			style="
 			position: absolute;
 			top: 9%;
 			left: 12%;
   			border: 4px solid #73AD21;">
-  			<input 	type="text" name="Subject"  required onclick="UpdateRequest()"
+  			<input 	type="text" name="Subject" id="Subject" required onclick="UpdateRequest()"
        				minlength="2" maxlength="50" size="30">
   		</div>
+
+  		<div style="
+  			display: none;">
+  			<input type="number" id="eventID" name="eventID" value="0">
+  		</div>
+  		
 
   		<div 
 			style="
@@ -251,11 +260,14 @@
 
 <script type="text/javascript">
 
+var StartDate = "2022-05-21";
+var EndDate = "2022-05-21";
+
 function UpdateRequest(){
 	const cb = document.querySelector('#anmod');
 	const start = document.querySelector('#StartDate');
 	const end = document.querySelector('#EndDate');
-	if(cb.checked && (start.value != "2022-05-21" || end.value != "2022-05-21")){
+	if(cb.checked && (start.value != StartDate || end.value != EndDate)){
 		document.getElementById("Alerted").style.display = "block";
 	}
 	else{
