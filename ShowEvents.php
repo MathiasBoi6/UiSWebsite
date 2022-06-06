@@ -14,15 +14,6 @@
 </script>
 
 <?php
-function changeEventAux($id){
-    $cookie_name = "event2bChanged";
-	$cookie_value = $id;
-	setcookie($cookie_name, $cookie_value["SSN"], time() + (86400 * 30), "/"); // 86400 = 1 day
-}
-//php_func();
-?>
-
-<?php
 
 include_once 'TopNav.html';
 include_once 'ShowUser.php';
