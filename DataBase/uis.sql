@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Vært: 127.0.0.1
--- Genereringstid: 06. 06 2022 kl. 12:00:24
+-- Genereringstid: 06. 06 2022 kl. 12:22:07
 -- Serverversion: 10.1.38-MariaDB
 -- PHP-version: 7.3.4
 
@@ -69,7 +69,8 @@ CREATE TABLE `besked` (
 INSERT INTO `besked` (`BeskedID`, `FromUserID`, `ToUserID`, `Subject`, `Text`) VALUES
 (3, 25, 1, 'Test at sende besked', 'Hej carl :)'),
 (4, 25, 14, 'Visuel feedback fra submission', 'Test af alert'),
-(5, 1, 25, 'Svar pÃ¥ besked', 'Tak for beskeden Mathias');
+(5, 1, 25, 'Svar pÃ¥ besked', 'Tak for beskeden Mathias'),
+(6, 1, 1, 'Jeg kan skrive til mig selv', 'Du er godt nok sej');
 
 -- --------------------------------------------------------
 
@@ -159,7 +160,7 @@ ALTER TABLE `begivenhed`
 -- Tilføj AUTO_INCREMENT i tabel `besked`
 --
 ALTER TABLE `besked`
-  MODIFY `BeskedID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `BeskedID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `inviterede`

@@ -67,7 +67,7 @@ $conn->close();
 ?>
 
     <h1>Skriv beskeder til sig selv</h1>
-    <p>Man kan desvære ikke sende beskeder her, og kan istedet kun se at man kan vælge alle brugere, inluksiv sig selv, fra listen.</p>
+    <p>Udfyld de grønne felter og klik 'Send' for at sende en besked.</p>
     <img src="Beskeder.png" alt="Beskeder" style="width: 30%; margin-left: auto;
             margin-right: auto;">
     <form action="Beskeder.php" method="post">
@@ -109,7 +109,7 @@ $conn->close();
         border: 4px solid #73AD21;">
         <input type="submit"
                id="submit"
-               value="Updater">
+               value="Send">
     </div>
     </form>
 </div>
