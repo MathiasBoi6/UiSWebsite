@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Vært: 127.0.0.1
--- Genereringstid: 06. 06 2022 kl. 12:22:07
+-- Genereringstid: 06. 06 2022 kl. 14:58:52
 -- Serverversion: 10.1.38-MariaDB
 -- PHP-version: 7.3.4
 
