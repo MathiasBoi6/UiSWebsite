@@ -20,7 +20,7 @@ echo "<span style='color: black;'>";
 if(isset($_REQUEST["Subject"]) && isset($_REQUEST["Text"]) && isset($_REQUEST["Type"]) 
 	&& isset($_REQUEST["AnswerDeadline"]) && isset($_REQUEST["StartDate"]) && isset($_REQUEST["StartTime"])
  	&& isset($_REQUEST["EndDate"]) && isset($_REQUEST["EndTime"])
- 	&& isset($_REQUEST["UserSearch"]) && isset($_REQUEST["eventID"]) ){
+ 	&& isset($_REQUEST["eventID"]) ){
 
 
 	$EID = $_REQUEST["eventID"];
@@ -54,7 +54,7 @@ if(isset($_REQUEST["Subject"]) && isset($_REQUEST["Text"]) && isset($_REQUEST["T
 	$End = date ('Y-m-d H:i:s', strtotime($EndD));
 	#echo $Start. "<br>";
 
-	$Users = explode(", ", $_REQUEST["UserSearch"])[1];
+	
 
 	
 	$ReqAns = 0;
@@ -70,15 +70,23 @@ if(isset($_REQUEST["Subject"]) && isset($_REQUEST["Text"]) && isset($_REQUEST["T
 		SET Text = '$Text', Subject = '$Subject', EventType = '$EventType', RequstedAnswer = '$ReqAns', AnswerDeadline = '$AnswerDeadline', StartTime = '$Start', EndTime = '$End'
 		WHERE EventID = '$EID'");
 	
-	$last_id = $conn->insert_id;
-	echo $last_id;
-	$conn->query("INSERT INTO inviterede VALUES (DEFAULT, '$Users', '$last_id', NULL)");
-	
+	$conn->query("UPDATE inviterede 
+		SET Answer = NULL
+		WHERE EventID = '$EID'");
 
+
+
+	$Users = explode(", ", $_REQUEST["UserSearch"])[1];
+	if(isset($_REQUEST["UserSearch"]) ){
+		$last_id = $conn->insert_id;
+		echo $last_id;
+		$conn->query("INSERT INTO inviterede VALUES (DEFAULT, '$Users', '$last_id', NULL)");	
+	}
+	
 	echo "<script> alert('Begivenhed opdateret'); </script>";
-	echo '<script type="text/javascript">', 'window.location.replace("http://localhost/Uni/ShowEvents.php");', '</script>';
+	echo '<script type="text/javascript">', 'window.location.replace("ShowEvents.php");', '</script>';
 }
-else{
+/*else{
 	echo "<h1>ISSET FAILED</h1>";
 	if (isset($_REQUEST["UserSearch"])){
 		echo "<h1>user was inputted</h1>";
@@ -93,7 +101,7 @@ else{
 		echo "<h1> DID NOT RECIVE EVENT ID</h1>";
 	}
 	
-}
+}*/
 echo "</span>";
 
 

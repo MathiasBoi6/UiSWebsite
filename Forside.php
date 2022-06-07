@@ -38,7 +38,7 @@ include_once 'ShowUser.php';
 			<th>Se beskeder</th><td>Her kan du se de beskeder som du har sendt og som du har modtaget</td>
 		</tr>
 		<tr>
-			<th>Se begivenheder</th><td>Her kan du se de begivenheder som du har lavet og som du er blevet inviteret til</td>
+			<th>Se begivenheder</th><td>Her kan du se de begivenheder som du har lavet og som du er blevet inviteret til. Tilmed kan du ændre egne begivenheder, og svare på modtagede begivenheder</td>
 		</tr>
 		<tr>
 			<th>Login</th><td>Her kan du vælge bruger og oprette nye brugere</td>

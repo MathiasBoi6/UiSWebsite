@@ -3,6 +3,12 @@
 <link rel="stylesheet" href="style.css">
 <body>
 
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
+
 <?php
 
 include_once 'TopNav.html';
@@ -20,6 +26,29 @@ $dbname="uis";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
+$cookie = ($_COOKIE['remberLogin']);
+
+#----------- If recived from form -----------------
+
+
+if(isset($_REQUEST["Yes"])){
+    $EID = $_REQUEST["Yes"];
+    $conn->query(
+        "UPDATE inviterede
+        SET Answer = 1
+        WHERE EventID = '$EID' && UserID = '$cookie'");
+}
+else if(isset($_REQUEST["No"])){
+    $EID = $_REQUEST["No"];
+    $conn->query(
+        "UPDATE inviterede
+        SET Answer = 0
+        WHERE EventID = '$EID' && UserID = '$cookie'");
+}
+
+
+
+#----------- Normal runtime ----------------------
 
 
 
@@ -33,7 +62,8 @@ echo "<div class=\"Centered\">
     </h2>";
 
 
-$cookie = ($_COOKIE['remberLogin']);
+#--------------------------Your events ----------------------
+
 $result = $conn->query(
     "SELECT Name, EventID, Subject, StartTime, EndTime, RequstedAnswer FROM `user`
     INNER JOIN `begivenhed` 
@@ -67,7 +97,7 @@ if ($result->num_rows > 0) {
         <input style='display:none;' name='Subject' value='" .  $row["Subject"] ."'>
         <input style='display:none;' name='StartTime' value='" .  $row["StartTime"] ."'>
         <input style='display:none;' name='EndTime' value='" .  $row["EndTime"] ."'>
-        <td>" . "<button type='submit' name='eventID' value='" . $row["EventID"] . "'>Ændre</td>
+        <td>" . "<button type='submit' name='eventID' value='" . $row["EventID"] . "'>Ændre</button></td>
         </form>
         </tr>";
     }
@@ -83,10 +113,10 @@ echo    "<br>
             Begivenheder du er blevet inviteret til:
         </h2>";
 
-
+#--------------------------Your invitations ----------------------
 
 $result = $conn->query(
-    "SELECT Name, Subject, EventType, StartTime, EndTime, AnswerDeadline, Answer, Text From inviterede
+    "SELECT inviterede.EventID, Name, Subject, EventType, StartTime, EndTime, AnswerDeadline, Answer, RequstedAnswer, Text From inviterede
     LEFT JOIN 
         (SELECT EventID, Name, Subject, EventType, StartTime, EndTime, AnswerDeadline, RequstedAnswer, Text  FROM `begivenhed`
         LEFT JOIN `user`
@@ -96,11 +126,49 @@ $result = $conn->query(
 
 
 if ($result->num_rows > 0) {
-    echo "<table><tr><th>Navn</th><th>Emne</th><th>Type</th><th>StartDato</th><th>SlutDato</th><th>SvarDeadline</th><th>Dit svar</th><th>Text</th></tr>";
+    echo "<table>
+    <tr>
+    <th>Navn</th>
+    <th>Emne</th>
+    <th>Type</th>
+    <th>StartDato</th>
+    <th>SlutDato</th>
+    <th>SvarDeadline</th>
+    <th>Dit svar</th>
+    <th>Text</th>
+    </tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo "<tr><td>" . $row["Name"]. "</td><td>" . $row["Subject"]. "</td><td>" . $row["EventType"]. "</td><td>" . $row["StartTime"]. "</td><td>" . $row["EndTime"].
-        "</td><td>" . $row["AnswerDeadline"]. "</td><td>" . $row["Answer"]."</td><td>" . $row["Text"]. "</td></tr>";
+        $actAnswer = $row["Answer"];
+        if($row["Answer"] == ""){
+            $actAnswer = "Ikke svaret";
+        }
+        else if($row["Answer"] == 1){
+            $actAnswer = "Ja";
+        }
+        else if($row["Answer"] == 0){
+            $actAnswer = "Nej";
+        }
+
+        if ($row["RequstedAnswer"] == 1) {
+            
+        }
+        echo "<tr><td>" . 
+        $row["Name"] . "</td><td>" . 
+        $row["Subject"]. "</td><td>" . 
+        $row["EventType"]. "</td><td>" . 
+        $row["StartTime"]. "</td><td>" . 
+        $row["EndTime"]. "</td><td>" . 
+        $row["AnswerDeadline"]. "</td><td>" . 
+        $row["Text"]. "</td><td>";
+        if ($row["RequstedAnswer"] == 1) {
+            echo "<form action='ShowEvents.php' method='post'>" .
+            $actAnswer . "&nbsp;&nbsp;" .
+            "<button type='submit' name='Yes' value='" . $row["EventID"] . "'>Ja</button>" .
+            "<button type='submit' name='No' value='" . $row["EventID"] . "'>Nej</button></td>" .
+            "</form>";
+        }
+        echo "</td></tr>";
     }
     echo "</table>";
 } else {

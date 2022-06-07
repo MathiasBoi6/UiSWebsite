@@ -17,6 +17,6 @@ if($result->num_rows == 1) {
 	echo '<p style="font-size: 24px; color:white;position: absolute; top: -1%; right: 1%;"> Logged in as: ' . ($Row["Name"]) . '</p>';
 } 
 else{
-	echo '<script type="text/javascript">', 'window.location.replace("http://localhost/Uni/Login.php");', '</script>';
+	echo '<script type="text/javascript">', 'window.location.replace("Login.php");', '</script>';
 }
 ?>

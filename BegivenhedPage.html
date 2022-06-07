@@ -225,23 +225,8 @@
   			border: 4px solid #73AD21;">
   			<input type="submit"
   				   id="submit"
-			       value="Updater">
+			       value="Opdater">
   		</div>
-
-
-  		<div 
-			style="
-			position: absolute;
-			top: 86%;
-			left: 85%;
-			width: 25%;
-			display: none;
-  			color: red;" id="Alerted">
-  			<p>
-  				*Der vil blive lavet en ny anmodning, da Dato er ændret
-  			</p>
-  		</div>
-  		
 		</form>
 
 	</div>
@@ -249,20 +234,5 @@
 </body>
 
 
-<script type="text/javascript">
-
-function UpdateRequest(){
-	const cb = document.querySelector('#anmod');
-	const start = document.querySelector('#StartDate');
-	const end = document.querySelector('#EndDate');
-	if(cb.checked && (start.value != "2022-05-21" || end.value != "2022-05-21")){
-		document.getElementById("Alerted").style.display = "block";
-	}
-	else{
-		document.getElementById("Alerted").style.display = "none";
-	}
-}
-
-</script>
 
 </html>
