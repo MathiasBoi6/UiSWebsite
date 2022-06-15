@@ -57,7 +57,7 @@ if(isset($_REQUEST["Subject"]) && isset($_REQUEST["Text"]) && isset($_REQUEST["U
 
     $conn->query("CALL `WriteMessage`('$cookie', '$Users', '$Subject', '$Text');");
     #$conn->query("INSERT INTO besked VALUES (DEFAULT, '$cookie', '$Users', '$Subject', '$Text')");
-    echo "<h1>CALL `WriteMessage`('$cookie', '$Users', '$Subject', '$Text');</h1>";
+    #echo "<h1>CALL `WriteMessage`('$cookie', '$Users', '$Subject', '$Text');</h1>";
 
     echo "<script> alert('Besked sendt'); </script>";
 }
