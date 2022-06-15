@@ -83,7 +83,7 @@ if(isset($_REQUEST["Subject"]) && isset($_REQUEST["Text"]) && isset($_REQUEST["T
 
 	$last_id = $conn->insert_id;
 	echo $last_id;
-	$conn->query("INSERT INTO inviterede VALUES (DEFAULT, '$Users', '$last_id', NULL)");
+	$conn->query("INSERT INTO inviterede VALUES ('$Users', '$last_id', NULL)");
 	#echo "<h1>INSERT INTO inviterede VALUES ('$Users', '$last_id', DEFAULT)</h1>";
 
 	echo "<script> alert('Begivenhed oprettet'); </script>";

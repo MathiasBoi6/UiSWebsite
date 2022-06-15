@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Vært: 127.0.0.1
--- Genereringstid: 06. 06 2022 kl. 14:58:52
+-- Genereringstid: 15. 06 2022 kl. 14:36:26
 -- Serverversion: 10.1.38-MariaDB
 -- PHP-version: 7.3.4
 
@@ -21,6 +21,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `uis`
 --
+
+DELIMITER $$
+--
+-- Procedurer
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `WriteMessage` (IN `fromP` INT, IN `toP` INT, IN `subjectP` TEXT, IN `textP` TEXT)  INSERT INTO besked
+VALUES(
+    DEFAULT,
+    fromP,
+    toP,
+    subjectP,
+    textP
+)$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -45,8 +60,12 @@ CREATE TABLE `begivenhed` (
 --
 
 INSERT INTO `begivenhed` (`EventID`, `UserID`, `Text`, `Subject`, `EventType`, `RequstedAnswer`, `AnswerDeadline`, `StartTime`, `EndTime`) VALUES
-(7, 25, 'Tester at kunne invitere personer', 'Inviter bruger', 'Begivenhed', 1, '2022-06-03', '2022-06-04 10:00:00', '2022-06-04 11:00:00'),
-(8, 26, 'Test til video', 'Test til video', 'Ferie', 1, '2022-06-01', '2022-06-05 15:50:00', '2022-06-05 16:51:00');
+(7, 25, 'test af Ã¦ndring', 'Inter bruger (Ã¦ndret)', 'Begivenhed', 0, '2022-05-21', '2022-05-21 11:11:00', '2022-05-21 11:11:00'),
+(8, 26, 'test', 'Test til video', 'Begivenhed', 1, '2022-05-21', '2022-06-05 11:11:00', '2022-06-08 11:11:00'),
+(9, 25, 'test', 'test', 'Begivenhed', 0, '2022-05-21', '2022-05-11 21:11:00', '2022-05-11 11:11:00'),
+(10, 1, 'Anmod svar', 'Test om request svar', 'Begivenhed', 1, '2022-05-25', '2022-05-10 11:11:00', '2022-05-27 11:01:00'),
+(11, 1, 'no request', 'test af ikke anmod', 'Begivenhed', 0, '2022-05-21', '2022-05-11 11:11:00', '2022-05-21 11:01:00'),
+(12, 27, 'test', 'Test til video', 'Begivenhed', 1, '2022-05-21', '2022-06-30 11:01:00', '2022-06-24 11:11:00');
 
 -- --------------------------------------------------------
 
@@ -67,7 +86,6 @@ CREATE TABLE `besked` (
 --
 
 INSERT INTO `besked` (`BeskedID`, `FromUserID`, `ToUserID`, `Subject`, `Text`) VALUES
-(3, 25, 1, 'Test at sende besked', 'Hej carl :)'),
 (4, 25, 14, 'Visuel feedback fra submission', 'Test af alert'),
 (5, 1, 25, 'Svar pÃ¥ besked', 'Tak for beskeden Mathias'),
 (6, 1, 1, 'Jeg kan skrive til mig selv', 'Du er godt nok sej');
@@ -79,7 +97,6 @@ INSERT INTO `besked` (`BeskedID`, `FromUserID`, `ToUserID`, `Subject`, `Text`) V
 --
 
 CREATE TABLE `inviterede` (
-  `InvitationID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
   `EventID` int(11) NOT NULL,
   `Answer` tinyint(4) DEFAULT NULL
@@ -89,9 +106,14 @@ CREATE TABLE `inviterede` (
 -- Data dump for tabellen `inviterede`
 --
 
-INSERT INTO `inviterede` (`InvitationID`, `UserID`, `EventID`, `Answer`) VALUES
-(5, 1, 7, NULL),
-(6, 25, 8, NULL);
+INSERT INTO `inviterede` (`UserID`, `EventID`, `Answer`) VALUES
+(1, 7, NULL),
+(25, 8, 0),
+(24, 9, NULL),
+(14, 0, NULL),
+(25, 10, NULL),
+(25, 11, NULL),
+(25, 12, NULL);
 
 -- --------------------------------------------------------
 
@@ -116,7 +138,8 @@ INSERT INTO `user` (`Name`, `Password`, `Age`, `Role`, `SSN`) VALUES
 ('UiSTest', 'uis', 11, 'student', 14),
 ('test', 'test', 4, 'test', 24),
 ('Mathias', '1234', 21, 'Student', 25),
-('Fremvisning', 'test', 21, 'Student', 26);
+('Fremvisning', 'test', 21, 'Student', 26),
+('VideoTest', '1234', 21, 'Video', 27);
 
 --
 -- Begrænsninger for dumpede tabeller
@@ -135,12 +158,6 @@ ALTER TABLE `besked`
   ADD PRIMARY KEY (`BeskedID`);
 
 --
--- Indeks for tabel `inviterede`
---
-ALTER TABLE `inviterede`
-  ADD PRIMARY KEY (`InvitationID`);
-
---
 -- Indeks for tabel `user`
 --
 ALTER TABLE `user`
@@ -154,7 +171,7 @@ ALTER TABLE `user`
 -- Tilføj AUTO_INCREMENT i tabel `begivenhed`
 --
 ALTER TABLE `begivenhed`
-  MODIFY `EventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `EventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `besked`
@@ -163,16 +180,10 @@ ALTER TABLE `besked`
   MODIFY `BeskedID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- Tilføj AUTO_INCREMENT i tabel `inviterede`
---
-ALTER TABLE `inviterede`
-  MODIFY `InvitationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- Tilføj AUTO_INCREMENT i tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `SSN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `SSN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

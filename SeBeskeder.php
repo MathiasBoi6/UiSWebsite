@@ -23,6 +23,19 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 
 
+#----------- If recived from form -----------------
+
+
+if(isset($_REQUEST["delete"])){
+    $BeskID = $_REQUEST["delete"];
+    $conn->query(
+        "DELETE FROM besked
+        WHERE BeskedID = '$BeskID'");
+}
+
+
+
+#----------- Display database table  ----------------------
 
 echo "<div class=\"Centered\">
     <h1>
@@ -36,16 +49,19 @@ echo "<div class=\"Centered\">
 
 $cookie = ($_COOKIE['remberLogin']);
 $result = $conn->query(
-    "SELECT Name, Subject, Text FROM `besked`
+    "SELECT Name, Subject, Text, BeskedID  FROM `besked`
     LEFT JOIN user
     ON user.SSN = besked.ToUserID
     WHERE besked.FromUserID='$cookie'");
 
 if ($result->num_rows > 0) {
-    echo "<table><tr><th>Modtager</th><th>Emne</th><th>Tekst</th></tr>";
+    echo "<table><tr><th>Modtager</th><th>Emne</th><th>Tekst</th><th>Slet besked?</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo "<tr><td>" . $row["Name"]. "</td><td>" . $row["Subject"]. "</td><td>" . $row["Text"]. "</td></tr>";
+        echo "<form action='SeBeskeder.php' method='post'>";
+        echo "<tr><td>" . $row["Name"]. "</td><td>" . $row["Subject"]. "</td><td>" . $row["Text"]. "</td>";
+        echo "<td><button type='submit' name='delete' value='" . $row["BeskedID"] . "'>Slet</button></td>";
+        echo "</tr></form>";
     }
     echo "</table>";
 } else {

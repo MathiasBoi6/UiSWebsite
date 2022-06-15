@@ -55,8 +55,9 @@ if(isset($_REQUEST["Subject"]) && isset($_REQUEST["Text"]) && isset($_REQUEST["U
     $Subject = $_REQUEST["Subject"];
     $Users = explode(", ", $_REQUEST["UserSearch"])[1];
 
-    $conn->query("INSERT INTO besked VALUES (DEFAULT, '$cookie', '$Users', '$Subject', '$Text')");
-    #echo "<h1>INSERT INTO besked VALUES (DEFAULT, '$cookie', '$Users', '$Subject', '$Text')</h1>";
+    $conn->query("CALL `WriteMessage`('$cookie', '$Users', '$Subject', '$Text');");
+    #$conn->query("INSERT INTO besked VALUES (DEFAULT, '$cookie', '$Users', '$Subject', '$Text')");
+    echo "<h1>CALL `WriteMessage`('$cookie', '$Users', '$Subject', '$Text');</h1>";
 
     echo "<script> alert('Besked sendt'); </script>";
 }
